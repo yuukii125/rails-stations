@@ -15,8 +15,8 @@
       <td><%= m.name %></td>
       <td><%= m.year %></td>
       <td><%= m.description %></td>
-      <td><%= image_tag "#{m.image_url}" %></td>
-      <td><%= m.is_showing ? "上映予定": "上映中" %></td>
+      <td><%= link_to "画像", "#{m.image_url}" %></td>
+      <td><%= m.is_showing %></td>
       <td><%= m.created_at %></td>
       <td><%= m.updated_at %></td>
     </tr>
