@@ -1,4 +1,4 @@
-<%= form_with url: admin_movies_path do |f| %>
+<%= form_with scope: :movie, url: admin_movies_path do |f| %>
   <div>
     <%= f.label :name, "映画タイトル" %>
     <%= f.text_field :name %>

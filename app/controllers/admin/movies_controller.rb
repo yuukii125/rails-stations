@@ -13,14 +13,14 @@ class Admin::MoviesController < ApplicationController
       redirect_to admin_movies_path, notice: "登録しました！"
     else
       flash.now[:danger] = "登録に失敗しました。"
-      render action: :new
+      render :new
     end
   end
 
   private
 
   def movie_params
-    params.permit(:name, :year, :description, :image_url, :is_showing)
+    params.require(:movie).permit(:name, :year, :description, :image_url, :is_showing)
   end
 
 end
