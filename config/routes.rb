@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get "/movies", to: "movies#index"
+  resources :movies, only: [:index]
   namespace :admin do
     resources :movies, only: [:index, :new, :create, :edit, :update]
   end
