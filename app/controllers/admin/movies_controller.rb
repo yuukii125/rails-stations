@@ -17,6 +17,21 @@ class Admin::MoviesController < ApplicationController
     end
   end
 
+  def edit
+    @movie = Movie.find(params[:id])
+  end
+
+  # def update
+  #   @movie = Movie.create(movie_params)
+  #   if @movie.save
+  #     redirect_to admin_movies_path, notice: "登録しました！"
+  #   else
+  #     flash.now[:danger] = "登録に失敗しました。"
+  #     render :new
+  #   end
+  # end
+
+
   private
 
   def movie_params
