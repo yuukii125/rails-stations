@@ -24,7 +24,8 @@ class Admin::MoviesController < ApplicationController
   def update
     @movie = Movie.find(params[:id])
     if @movie.update(movie_params)
-      redirect_to admin_movies_path, notice: "編集しました！"
+      flash[:notice] = '編集しました'
+      redirect_to admin_movies_path
     else
       flash.now[:danger] = "編集に失敗しました。"
       render :edit
