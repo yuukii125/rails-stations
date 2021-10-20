@@ -15,7 +15,7 @@
       <td><%= m.name %></td>
       <td><%= m.year %></td>
       <td><%= m.description %></td>
-      <td><%= image_tag "#{m.image_url}" %></td>
+      <td><%= link_to "#{m.image_url}", "#" %></td>
       <td>
         <% if m.is_showing == true %>
           上映中
