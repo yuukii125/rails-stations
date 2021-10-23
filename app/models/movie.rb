@@ -5,8 +5,5 @@ class Movie < ApplicationRecord
 
   with_options presence: true do
     validates :name
-    validates :description
-    validates :image_url
-    validates :year
   end
 end
