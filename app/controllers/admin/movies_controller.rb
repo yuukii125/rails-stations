@@ -1,4 +1,6 @@
 class Admin::MoviesController < ApplicationController
+  before_action :set_movie, only: [:edit, :update]
+
   def index
     @movies = Movie.all
   end
@@ -16,13 +18,13 @@ class Admin::MoviesController < ApplicationController
       render :new
     end
   end
-
+  
   def edit
-    @movie = Movie.find(params[:id])
+    # @movie = Movie.find(params[:id])
   end
     
   def update
-    @movie = Movie.find(params[:id])
+    # @movie = Movie.find(params[:id])
     if @movie.update(movie_params)
       flash[:notice] = '編集しました'
       redirect_to admin_movies_path
@@ -36,7 +38,12 @@ class Admin::MoviesController < ApplicationController
   private
 
   def movie_params
-    params.require(:movie).permit(:id, :name, :year, :description, :image_url, :is_showing)
+    params.require(:movie).permit(:name, :year, :description, :image_url, :is_showing)
   end
 
+  def set_movie
+    unless @movie = Movie.find_by(id: params[:id])
+      redirect_to admin_movies_path, notice: "該当のユーザーは存在しません"
+    end
+  end
 end
