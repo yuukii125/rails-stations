@@ -19,21 +19,20 @@ class Admin::MoviesController < ApplicationController
     end
   end
   
-  def edit
-    # @movie = Movie.find(params[:id])
-  end
+  def edit;  end
     
   def update
-    # @movie = Movie.find(params[:id])
-    if @movie.update(movie_params)
-      flash[:notice] = '編集しました'
-      redirect_to admin_movies_path
+    if !@movie.present?
+      flash.now[:danger] = "編集元の映画は存在しません。"
+      render :index
+    end
+    if @movie.update(update_movie_params)
+      redirect_to admin_movies_path, notice: "編集しました！"
     else
       flash.now[:danger] = "編集に失敗しました。"
       render :edit
     end
   end
-
 
   private
 
@@ -41,9 +40,11 @@ class Admin::MoviesController < ApplicationController
     params.require(:movie).permit(:name, :year, :description, :image_url, :is_showing)
   end
 
+  def update_movie_params
+    params.permit(:name, :year, :description, :image_url, :is_showing)
+  end
+
   def set_movie
-    unless @movie = Movie.find_by(id: params[:id])
-      redirect_to admin_movies_path, notice: "該当のユーザーは存在しません"
-    end
+    @movie = Movie.find(params[:id])
   end
 end

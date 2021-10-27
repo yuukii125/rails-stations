@@ -1,9 +1,6 @@
 class Movie < ApplicationRecord
-  validates :name, length: { maximum: 160 }, uniqueness: true
-  validates :year, length: { maximum: 45 }
-  validates :image_url, length: { maximum: 255 }
+  validates :name, presence: true, length: { maximum: 160 }, uniqueness: true
+  validates :description, length: { maximum: 500 }
+  validates :image_url, length: { maximum: 160 }
 
-  with_options presence: true do
-    validates :name
-  end
 end
