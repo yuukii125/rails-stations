@@ -1,5 +1,5 @@
 class Admin::MoviesController < ApplicationController
-  before_action :set_movie, only: [:edit, :update]
+  before_action :set_movie, only: [:edit, :update, :destroy]
 
   def index
     @movies = Movie.all
@@ -31,6 +31,12 @@ class Admin::MoviesController < ApplicationController
     else
       flash.now[:danger] = "編集に失敗しました。"
       render :edit
+    end
+  end
+
+  def destroy
+    if @movie.destroy
+      redirect_to admin_movies_path, notice: "削除しました！"
     end
   end
 

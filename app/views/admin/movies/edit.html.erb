@@ -26,3 +26,5 @@
   </div>
   <%= f.submit "編集する" %>
 <% end %>
+
+<%= link_to "削除する",  admin_movie_path(@movie.id), method: :delete, data: {confirm: "本当に削除しますか？"}%>
