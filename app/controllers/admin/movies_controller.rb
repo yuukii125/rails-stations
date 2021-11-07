@@ -2,7 +2,8 @@ class Admin::MoviesController < ApplicationController
   before_action :set_movie, only: [:edit, :update, :destroy]
 
   def index
-    @movies = Movie.all
+    @q = Movie.ransack(params[:q])
+    @movies = @q.result(distinct: true)
   end
 
   def new
