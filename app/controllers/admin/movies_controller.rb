@@ -1,9 +1,13 @@
 class Admin::MoviesController < ApplicationController
-  before_action :set_movie, only: [:edit, :update, :destroy]
+  before_action :set_movie, only: [:show, :edit, :update, :destroy]
 
   def index
     @q = Movie.ransack(params[:q])
     @movies = @q.result(distinct: true)
+  end
+
+  def show
+    @schedules = @movie.schedules
   end
 
   def new

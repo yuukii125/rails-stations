@@ -1,0 +1,22 @@
+<table>
+  <tr>
+    <th>ID</th>
+    <th>タイトル</th>
+    <th>作品ID</th>
+    <th>開始時刻</th>
+    <th>終了時刻</th>
+    <th>登録日時</th>
+    <th>更新日時</th>
+  </tr>
+  <tr>
+    <td><%= @schedule.id %></td>
+    <td><%= @schedule.movie.name %></td>
+    <td><%= @schedule.movie_id %></td>
+    <td><%= link_to  "#{@schedule.start_time}", admin_schedule_path(@schedule.id) %></td>
+    <td><%= link_to  "#{@schedule.end_time}", admin_schedule_path(@schedule.id) %></td>
+    <td><%= @schedule.created_at %></td>
+    <td><%= @schedule.updated_at %></td>
+    </tr>
+</table>
+
+<%= link_to "編集する",  edit_admin_schedule_path(@schedule.id) %>

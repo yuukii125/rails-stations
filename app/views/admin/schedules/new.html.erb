@@ -1,0 +1,16 @@
+<%= form_with scope: :schedule, url: admin_schedules_path do |f| %>
+  <%= f.hidden_field :movie_id, value: @movie.id %>
+  <div>
+    <%= @movie.id %>
+  </div>
+  <div>
+    <%= @movie.name %>
+  </div>
+  <div>
+    <%= f.text_field :start_time %>
+  </div>
+  <div>
+    <%= f.text_field :end_time %>
+  </div>
+  <%= f.submit "登録する" %>
+<% end %>

@@ -1,0 +1,30 @@
+ <%= form_with model: [:admin, @schedule], url: admin_schedule_path, local: true, method: :put do |f| %>
+  <table>
+    <tr>
+      <th>作品ID</th>
+      <th>タイトル</th>
+      <th>開始時刻</th>
+      <th>終了時刻</th>
+    </tr>
+    <tr>
+      <td>
+        <%= @schedule.movie_id %>
+      </td>
+
+      <td>
+        <%= @schedule.movie.name %>
+      </td>
+
+      <td>
+        <%= f.text_field :start_time %>
+      </td>
+
+      <td>
+        <%= f.text_field :end_time %>
+      </td>
+    </tr>
+  </table>
+  <%= f.submit "編集する" %>
+<% end %>
+
+<%= link_to "削除する",  admin_schedule_path(@schedule.id), method: :delete, data: {confirm: "本当に削除しますか？"}%>
