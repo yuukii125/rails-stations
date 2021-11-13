@@ -5,13 +5,19 @@
 
 <table>
   <tr>
+    <th>作品ID</th>
     <th>開始時刻</th>
     <th>終了時刻</th>
+    <th>登録日時</th>
+    <th>更新日時</th>
   </tr>
   <% @schedules.each do |s| %>
     <tr>
+      <td><%= s.movie_id %></td>
       <td><%= s.start_time %></td>
       <td><%= s.end_time %></td>
+      <td><%= s.created_at %></td>
+      <td><%= s.updated_at %></td>
       <td><%= link_to "編集する",  edit_admin_schedule_path(s.id) %></td>
     </tr>
   <% end %>
