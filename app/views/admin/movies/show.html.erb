@@ -8,11 +8,11 @@
     <th>開始時刻</th>
     <th>終了時刻</th>
   </tr>
-  <tr>
-    <% @schedules.each do |s| %>
+  <% @schedules.each do |s| %>
+    <tr>
       <td><%= s.start_time %></td>
       <td><%= s.end_time %></td>
       <td><%= link_to "編集する",  edit_admin_schedule_path(s.id) %></td>
-    <% end %>
-  </tr>
+    </tr>
+  <% end %>
 </table>
