@@ -1,0 +1,15 @@
+SCREEN
+<table>
+  <tr>
+    <th>1</th>
+    <th>2</th>
+    <th>3</th>
+    <th>4</th>
+    <th>5</th>
+  </tr>
+  <% @sheets.each do |s| %>
+    <tr>
+      <td><%= s.row %> - <%= s.column %></td>
+    </tr>
+  <% end %>
+</table>

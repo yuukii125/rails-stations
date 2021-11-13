@@ -19,22 +19,22 @@ class Admin::MoviesController < ApplicationController
       render :new
     end
   end
-  
+
   def edit;  end
-    
+
   def update
     if !@movie.present?
       flash.now[:danger] = "編集元の映画は存在しません。"
       render :index
     end
-    if @movie.update(update_movie_params)
+    if @movie.update(movie_params)
       redirect_to admin_movies_path, notice: "編集しました！"
     else
       flash.now[:danger] = "編集に失敗しました。"
       render :edit
     end
   end
-  
+
   def destroy
     if @movie.destroy
       redirect_to admin_movies_path, notice: "削除しました！"

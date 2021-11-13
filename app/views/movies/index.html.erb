@@ -3,7 +3,13 @@
   <p><%= m.year %></p>
   <p><%= m.description %></p>
   <%= image_tag "#{m.image_url}" %>
-  <p><%= m.is_showing %></p>
+  <p>
+    <% if m.is_showing == true %>
+      上映中
+    <% else %>
+      上映予定
+    <% end %>
+  </p>
   <p><%= m.created_at %></p>
   <p><%= m.updated_at %></p>
 <% end %>
