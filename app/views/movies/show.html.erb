@@ -1,0 +1,19 @@
+<%= @movie.id %>
+<%= @movie.name %>
+<%= @movie.year %>
+<%= @movie.description %>
+<%= link_to "#{@movie.image_url}", "#" %>
+
+<% if @movie.is_showing == true %>
+  上映中
+<% else %>
+  上映予定
+<% end %>
+
+<%= @movie.created_at %>
+<%= @movie.updated_at %>
+
+<% @schedules.each do |s| %>
+  <%= s.start_time %>~
+  <%= s.end_time %>
+<% end %>
