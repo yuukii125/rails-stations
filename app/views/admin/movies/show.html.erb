@@ -1,6 +1,4 @@
-<%= @movie.id %>
-<%= @movie.name %>
-<%= @movie.image_url %>
+
 <%= link_to "スケジュールを追加する",  new_admin_movie_schedule_path(@movie.id) %>
 
 <table>
@@ -14,6 +12,8 @@
   </tr>
   <% @schedules.each do |s| %>
     <tr>
+      <td><%= @movie.id %></td>
+      <td><%= @movie.name %></td>
       <td><%= link_to  "#{s.start_time}", admin_schedule_path(s.id) %></td>
       <td><%= link_to  "#{s.end_time}", admin_schedule_path(s.id) %></td>
       <td><%= s.created_at %></td>
