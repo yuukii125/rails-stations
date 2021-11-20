@@ -14,8 +14,8 @@
     <tr>
       <td><%= @movie.id %></td>
       <td><%= @movie.name %></td>
-      <td><%= link_to  "#{s.start_time}", admin_schedule_path(s.id) %></td>
-      <td><%= link_to  "#{s.end_time}", admin_schedule_path(s.id) %></td>
+      <td><%= link_to  "#{s.start_time.strftime("%H:%M") }", admin_schedule_path(s.id) %></td>
+      <td><%= link_to  "#{s.end_time.strftime("%H:%M") }", admin_schedule_path(s.id) %></td>
       <td><%= s.created_at %></td>
       <td><%= s.updated_at %></td>
       <td><%= link_to "編集する",  edit_admin_schedule_path(s.id) %></td>

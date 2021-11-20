@@ -10,8 +10,8 @@
     <tr>
       <td><%= @movie.id %></td>
       <td><%= @movie.name %></td>
-      <td><%= f.text_field :start_time %></td>
-      <td><%= f.text_field :end_time %></td>
+      <td><%= f.time_field :start_time %></td>
+      <td><%= f.time_field :end_time %></td>
     </tr>
   </table>
   <%= f.submit "登録する" %>

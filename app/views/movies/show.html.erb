@@ -1,19 +1,50 @@
-<%= @movie.id %>
-<%= @movie.name %>
-<%= @movie.year %>
-<%= @movie.description %>
-<%= link_to "#{@movie.image_url}", "#" %>
+<table>
+  <tr>
+    <th>作品ID</th>
+    <th>映画タイトル</th>
+    <th>公開年</th>
+    <th>概要</th>
+    <th>画像</th>
+    <th>上映中か</th>
+    <th>登録日時</th>
+    <th>更新日時</th>
+    <th>上映スケジュール</th>
+  </tr>
+  <tr>
+    <td><%= @movie.id %></td>
+    <td><%= @movie.name %></td>
+    <td><%= @movie.year %></td>
+    <td><%= @movie.description %></td>
+    <td><%= link_to "#{@movie.image_url}", "#" %></td>
+    <td>
+      <% if @movie.is_showing == true %>
+        上映中
+      <% else %>
+        上映予定
+      <% end %>
+    </td>
+    <td><%= @movie.created_at %></td>
+    <td><%= @movie.updated_at %></td>
+    <td>
+      <% @schedules.each do |s| %>
+        <%= s.start_time.strftime("%H:%M")  %>~
+        <%= s.end_time.strftime("%H:%M")  %>/
+      <% end %>
+    </td>
+  </tr>
+</table>
 
-<% if @movie.is_showing == true %>
-  上映中
-<% else %>
-  上映予定
-<% end %>
+<%= form_with url:movie_schedule_sheets_path(@movie,@schedules), method: :get do |f| %>
 
-<%= @movie.created_at %>
-<%= @movie.updated_at %>
-
-<% @schedules.each do |s| %>
-  <%= s.start_time %>~
-  <%= s.end_time %>
+  <%= f.select :date, [[@today.strftime("%-m月%-d日"),@today],
+                      [@today.since(1.days).strftime("%-m月%-d日"),@today.since(1.days)],
+                      [@today.since(2.days).strftime("%-m月%-d日"),@today.since(2.days)],
+                      [@today.since(3.days).strftime("%-m月%-d日"),@today.since(3.days)],
+                      [@today.since(4.days).strftime("%-m月%-d日"),@today.since(4.days)],
+                      [@today.since(5.days).strftime("%-m月%-d日"),@today.since(5.days)],
+                      [@today.since(6.days).strftime("%-m月%-d日"),@today.since(6.days)],
+                      [@today.since(7.days).strftime("%-m月%-d日"),@today.since(7.days)]],
+                      prompt: "日付を選んでください"%>
+  <%= f.collection_select :start_time, @schedules, :start_time, :start_time, prompt: "開始時刻を選んでください" %>
+  <%= f.submit "座席を予約する" %>
 <% end %>

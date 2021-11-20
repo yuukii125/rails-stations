@@ -34,8 +34,8 @@
       </td>
       <td>
       <% m.schedules.each do |s| %>
-        <%= s.start_time %>~
-        <%= s.end_time %>
+        <%= s.start_time.strftime("%H:%M")  %>~
+        <%= s.end_time.strftime("%H:%M")  %>
       <% end %>
       </td>
       <td><%= m.created_at %></td>
