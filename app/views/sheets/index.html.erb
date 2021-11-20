@@ -1,5 +1,3 @@
-<%#= @sheets.reservation.date %>
-
 SCREEN
 <table>
   <tr>
@@ -12,7 +10,7 @@ SCREEN
   <% @sheets.each do |s| %>
     <tr>
       <td>
-      <%= link_to "#{s.row} - #{s.column}", new_movie_schedule_reservation_path  %>
+      <%= link_to "#{s.row} - #{s.column}", new_movie_schedule_reservation_path(@reservation)  %>
       </td>
     </tr>
   <% end %>
