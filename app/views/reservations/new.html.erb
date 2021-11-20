@@ -1,1 +1,28 @@
 ご予約ページ
+<%= form_with url: movie_schedule_reservations_path do |f| %>
+  <%#= f.hidden_field :movie_id, value: @movie.id %>
+  <table>
+    <tr>
+      <th>映画タイトル</th>
+      <th>選択中の日時</th>
+      <th>選択中の座席</th>
+      <th>氏名</th>
+      <th>メールアドレス</th>
+    </tr>
+    <tr>
+      <td><%#= @movie.name %></td>
+      <td>
+        開始時間<%=  %>
+        終了時間<%=  %>
+      </td>
+      <td><%#= @movie.name %></td>
+      <td>
+        <%= f.text_field :name %>
+      </td>
+      <td>
+        <%= f.email_field :email %>
+      </td>
+    </tr>
+  </table>
+  <%= f.submit "予約する" %>
+<% end %>

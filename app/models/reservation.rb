@@ -2,5 +2,9 @@ class Reservation < ApplicationRecord
   belongs_to :schedule
   belongs_to :sheet
 
-  validates :email, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }
+  validates :date, presence: true
+  validates :schedule_id, presence: true
+  validates :sheet_id, presence: true
+  validates :name, presence: true
+  validates :email, presence: true, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }
 end

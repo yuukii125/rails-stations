@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :movies, only: [:index, :show] do
     resources :schedules, only: [:show] do
       resources :sheets, only: [:index]
-      resources :reservation, only: [:new]
+      resources :reservations, only: [:new, :create]
     end
   end
   resources :sheets, only: [:index]

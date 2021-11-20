@@ -1,7 +1,8 @@
 class SheetsController < ApplicationController
   def index
     @sheets = Sheet.all
-    # @reservation = Reservation.find(schedule_id: params[:schedule])
+    @date = params[:date]
+    @movie = Movie.find(params[:movie_id])
   end
 
 end

@@ -33,8 +33,7 @@
     </td>
   </tr>
 </table>
-
-<%= form_with url:movie_schedule_sheets_path(movie_id: @movie, schedule_id: @schedules), method: :get do |f| %>
+<%= form_with model: @reservation, url:movie_schedule_sheets_path(movie_id: @movie, schedule_id: @schedules), method: :get do |f| %>
 
   <%= f.select :date, [[@today.strftime("%-m月%-d日"),@today],
                       [@today.since(1.days).strftime("%-m月%-d日"),@today.since(1.days)],
