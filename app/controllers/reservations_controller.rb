@@ -1,8 +1,8 @@
 class ReservationsController < ApplicationController
   def new
     @movie = Movie.find(params[:movie_id])
-    @sheet = Sheet.find(params[:sheet_id])
     @date = params[:date]
+    @sheet = Sheet.find(params[:sheet_id])
     @reservation = Reservation.new
     @schedule = Schedule.find(params[:schedule_id])
   end
@@ -12,7 +12,6 @@ class ReservationsController < ApplicationController
     @schedule = Schedule.find(params[:schedule_id])
     @sheet = Sheet.find(params[:sheet_id])
     @date = params[:date]
-    @sheet = Sheet.find(params[:sheet_id])
     @reservation = Reservation.create(reservation_params)
     if @reservation.save
       redirect_to movie_path(@movie.id), notice: "予約しました！"
