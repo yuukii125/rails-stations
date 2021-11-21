@@ -1,5 +1,7 @@
 <%= @movie.name %>
 <%= @date %>
+<%= @schedule.start_time.strftime("%H:%M") %>
+<%= @schedule.end_time.strftime("%H:%M") %>
 SCREEN
 <table>
   <tr>
@@ -12,7 +14,9 @@ SCREEN
   <% @sheets.each do |s| %>
     <tr>
       <td>
-      <%= link_to "#{s.row} - #{s.column}", new_movie_schedule_reservation_path  %>
+      <%= link_to  new_movie_schedule_reservation_path(date: @date, sheet_id: s.id, movie_id: @movie.id, schedule_id: @schedule.id) do %>
+        <%= s.row %> - <%= s.column %>
+      <% end %>
       </td>
     </tr>
   <% end %>

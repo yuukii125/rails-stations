@@ -7,6 +7,7 @@ class MoviesController < ApplicationController
   def show
     @movie = Movie.find(params[:id])
     @schedules = @movie.schedules
+    @schedule = @schedules[0]
   end
 
   private

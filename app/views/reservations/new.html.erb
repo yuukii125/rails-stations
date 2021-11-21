@@ -1,6 +1,8 @@
 ご予約ページ
-<%= form_with url: movie_schedule_reservations_path do |f| %>
-  <%#= f.hidden_field :movie_id, value: @movie.id %>
+<%= form_with url: movie_schedule_reservations_path(@movie.id, @schedule.id) do |f| %>
+  <%= f.hidden_field :date, value: @date %>
+  <%= f.hidden_field :schedule_id, value: @schedule.id %>
+  <%= f.hidden_field :sheet_id, value: @sheet.id %>
   <table>
     <tr>
       <th>映画タイトル</th>
@@ -10,12 +12,15 @@
       <th>メールアドレス</th>
     </tr>
     <tr>
-      <td><%#= @movie.name %></td>
+      <td><%= @movie.name %></td>
       <td>
-        開始時間<%=  %>
-        終了時間<%=  %>
+        <%= @date %>
+        <%= @schedule.start_time.strftime("%H:%M") %>
+        <%= @schedule.end_time.strftime("%H:%M") %>
       </td>
-      <td><%#= @movie.name %></td>
+      <td>
+        <%= @sheet.row %> - <%= @sheet.column %>
+      </td>
       <td>
         <%= f.text_field :name %>
       </td>

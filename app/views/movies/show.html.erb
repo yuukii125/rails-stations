@@ -33,7 +33,7 @@
     </td>
   </tr>
 </table>
-<%= form_with model: @reservation, url:movie_schedule_sheets_path(movie_id: @movie, schedule_id: @schedules), method: :get do |f| %>
+<%= form_with model: @reservation, url:movie_schedule_sheets_path(movie_id: @movie, schedule_id: @schedule), method: :get do |f| %>
 
   <%= f.select :date, [[@today.strftime("%-m月%-d日"),@today],
                       [@today.since(1.days).strftime("%-m月%-d日"),@today.since(1.days)],
@@ -44,7 +44,7 @@
                       [@today.since(6.days).strftime("%-m月%-d日"),@today.since(6.days)],
                       [@today.since(7.days).strftime("%-m月%-d日"),@today.since(7.days)]],
                       prompt: "日付を選んでください"%>
-  <%= f.collection_select :start_time, @schedules, :start_time, :start_time, prompt: "開始時刻を選んでください" %>
+  <%= f.collection_select :start_time, @schedules, :id, :start_time, prompt: "開始時刻を選んでください" %>
   <%= f.submit "座席を予約する" %>
 <% end %>
 <button>座席を予約する</button>
