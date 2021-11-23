@@ -33,18 +33,24 @@
     </td>
   </tr>
 </table>
-<%= form_with model: @reservation, url:movie_schedule_sheets_path(movie_id: @movie, schedule_id: @schedule), method: :get do |f| %>
+<% if @schedule.present? %>
+  <%= form_with model: @reservation, url:movie_schedule_sheets_path(movie_id: @movie, schedule_id: @schedule.id), method: :get do |f| %>
 
-  <%= f.select :date, [[@today.strftime("%-m月%-d日"),@today],
-                      [@today.since(1.days).strftime("%-m月%-d日"),@today.since(1.days)],
-                      [@today.since(2.days).strftime("%-m月%-d日"),@today.since(2.days)],
-                      [@today.since(3.days).strftime("%-m月%-d日"),@today.since(3.days)],
-                      [@today.since(4.days).strftime("%-m月%-d日"),@today.since(4.days)],
-                      [@today.since(5.days).strftime("%-m月%-d日"),@today.since(5.days)],
-                      [@today.since(6.days).strftime("%-m月%-d日"),@today.since(6.days)],
-                      [@today.since(7.days).strftime("%-m月%-d日"),@today.since(7.days)]],
-                      prompt: "日付を選んでください"%>
-  <%= f.collection_select :id, @schedules, :id, :start_time, prompt: "開始時刻を選んでください" %>
-  <%= f.submit "座席を予約する" %>
+    <%= f.select :date, [[@today.strftime("%-m月%-d日"),@today],
+                        [@today.since(1.days).strftime("%-m月%-d日"),@today.since(1.days)],
+                        [@today.since(2.days).strftime("%-m月%-d日"),@today.since(2.days)],
+                        [@today.since(3.days).strftime("%-m月%-d日"),@today.since(3.days)],
+                        [@today.since(4.days).strftime("%-m月%-d日"),@today.since(4.days)],
+                        [@today.since(5.days).strftime("%-m月%-d日"),@today.since(5.days)],
+                        [@today.since(6.days).strftime("%-m月%-d日"),@today.since(6.days)],
+                        [@today.since(7.days).strftime("%-m月%-d日"),@today.since(7.days)]],
+                        prompt: "日付を選んでください"%>
+    <%= f.collection_select :id, @schedules, :id, :start_time, prompt: "開始時刻を選んでください" %>
+    <%= f.submit "座席を予約する" %>
+  <% end %>
+  <button>座席を予約する</button>
+<% else %>
+  <p>上映スケジュールはありません</p>
 <% end %>
-<button>座席を予約する</button>
+
+<%= link_to "一覧にもどる", movies_path %>

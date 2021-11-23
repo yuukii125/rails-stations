@@ -7,7 +7,11 @@ class MoviesController < ApplicationController
   def show
     @movie = Movie.find(params[:id])
     @schedules = @movie.schedules
-    @schedule = @schedules[0]
+    if @schedules.present?
+      @schedule = @schedules[0]
+    else
+      @schedule = false
+    end
   end
 
   private
