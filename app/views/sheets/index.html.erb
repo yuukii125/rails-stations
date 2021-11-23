@@ -1,24 +1,24 @@
-<%= @movie.name %>
-<%= @date %>
-<%= @schedule.start_time.strftime("%H:%M") %>
-<%= @schedule.end_time.strftime("%H:%M") %>
-SCREEN
-<table>
+<h2>座席予約ページ</h2>
+<p>映画タイトル：<%= @movie.name %></p>
+<p>鑑賞日：<%= @date %></p>
+<p>開始時刻：<%= @schedule.start_time.strftime("%H:%M") %></p>
+<p>終了時刻：<%= @schedule.end_time.strftime("%H:%M") %></p>
+
+<h3>SCREEN</h3>
+<table class="sheets_index">
   <tr>
-    <th>1</th>
-    <th>2</th>
-    <th>3</th>
-    <th>4</th>
-    <th>5</th>
+    <td>1</td>
+    <td>2</td>
+    <td>3</td>
+    <td>4</td>
+    <td>5</td>
   </tr>
   <% @sheets.each do |s| %>
-    <tr>
-      <td>
+      <td class="sheet_cell">
       <%= link_to  new_movie_schedule_reservation_path(date: @date, sheet_id: s.id, movie_id: @movie.id, schedule_id: @schedule.id) do %>
         <%= s.row %> - <%= s.column %>
       <% end %>
       </td>
-    </tr>
   <% end %>
 </table>
 

@@ -1,3 +1,27 @@
-// Place all the styles related to the sheets controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+h3 {
+  text-align: center;
+  margin-top: 100px;
+  margin-bottom: 70px;
+  border: 1px solid;
+  padding: 10px;
+}
+
+.sheets_index{
+  border-collapse: collapse;
+  border-spacing: 0;
+  table-layout: fixed;
+  width: 1000px;
+  margin-bottom: 40px;
+}
+
+.sheets_index td {
+  float: left;
+  width: 19%;
+  text-align: center;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.sheet_cell {
+  border: 0.1px solid;
+}
