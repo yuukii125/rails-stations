@@ -6,3 +6,8 @@
   max-width: 1000px;
   margin: auto;
 }
+
+input[type="text"],input[type="email"],input[type="submit"] {
+  width: 200px;
+  height: 20px;
+}
