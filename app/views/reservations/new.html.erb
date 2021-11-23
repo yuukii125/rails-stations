@@ -1,33 +1,53 @@
-ご予約ページ
+<h2>ご予約ページ</h2>
 <%= form_with url: movie_schedule_reservations_path(@movie.id, @schedule.id) do |f| %>
   <%= f.hidden_field :date, value: @date %>
   <%= f.hidden_field :schedule_id, value: @schedule.id %>
   <%= f.hidden_field :sheet_id, value: @sheet.id %>
-  <table>
+  <table class="reservation_new" cellpadding="15">
     <tr>
-      <th>映画タイトル</th>
-      <th>選択中の日時</th>
-      <th>選択中の座席</th>
-      <th>氏名</th>
-      <th>メールアドレス</th>
+      <td class="cell_title">映画タイトル</td>
     </tr>
     <tr>
       <td><%= @movie.name %></td>
+    </tr>
+    <tr>
+      <td class="cell_title">選択中の日時</td>
+    </tr>
+    <tr>
       <td>
-        <%= @date %>
-        <%= @schedule.start_time.strftime("%H:%M") %>
-        <%= @schedule.end_time.strftime("%H:%M") %>
+      <%= @date %>
+      <%= @schedule.start_time.strftime("%H:%M") %>
+      <%= @schedule.end_time.strftime("%H:%M") %>
       </td>
+    </tr>
+    <tr>
+      <td class="cell_title">選択中の座席</td>
+    </tr>
+    <tr>
       <td>
-        <%= @sheet.row %> - <%= @sheet.column %>
+      <%= @sheet.row %> - <%= @sheet.column %>
       </td>
+    </tr>
+    <tr>
+      <td class="cell_title">氏名</td>
+    </tr>
+    <tr>
       <td>
-        <%= f.text_field :name %>
+      <%= f.text_field :name, placeholder: "氏名を入力してください" %>
       </td>
+    </tr>
+    <tr>
+      <td class="cell_title">メールアドレス</td>
+    </tr>
+    <tr>
       <td>
-        <%= f.email_field :email %>
+        <%= f.email_field :email, placeholder: "メールアドレスを入力してください" %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= f.submit "予約する" %>
       </td>
     </tr>
   </table>
-  <%= f.submit "予約する" %>
 <% end %>
