@@ -1,15 +1,18 @@
+<h2>作品一覧</h2>
 <% @movies.each do |m| %>
-  <p><%= link_to "#{m.name}", movie_path(m.id) %></p>
-  <p><%= m.year %></p>
-  <p><%= m.description %></p>
-  <%= image_tag ("#{m.image_url}") %>
-  <p>
-    <% if m.is_showing == true %>
-      上映中
-    <% else %>
-      上映予定
-    <% end %>
-  </p>
-  <p><%= m.created_at %></p>
-  <p><%= m.updated_at %></p>
+  <div class="movie_items">
+    <p><%= link_to "#{m.name}", movie_path(m.id) %></p>
+    <p>公開：<%= m.year %>年</p>
+    <p>概要：<%= m.description %></p>
+    <%= image_tag ("#{m.image_url}") %>
+    <p>
+      <% if m.is_showing == true %>
+        上映中
+      <% else %>
+        上映予定
+      <% end %>
+    </p>
+    <p>登録日時：<%= m.created_at.strftime("%-m月%-d日%H:%M") %></p>
+    <p>更新日時：<%= m.updated_at.strftime("%-m月%-d日%H:%M") %></p>
+  </div>
 <% end %>
