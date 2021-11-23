@@ -51,3 +51,5 @@
     </tr>
   </table>
 <% end %>
+
+<%= link_to "座席予約ページへ戻る", movie_schedule_sheets_path(movie_id: @movie.id, schedule_id: @schedule.id, date: @date) %>
