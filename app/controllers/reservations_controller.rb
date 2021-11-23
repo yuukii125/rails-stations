@@ -31,12 +31,7 @@ class ReservationsController < ApplicationController
     elsif @reservation.save
       redirect_to movie_path(@movie.id), notice: "予約しました！"
     else
-      flash.now[:danger] = "予約に失敗しました。"
-      @movie
-      @date
-      @schedule
-      @sheet
-      render :new
+      redirect_to new_movie_schedule_reservation_path(movie_id: params[:movie_id], date: params[:date], sheet_id: params[:sheet_id], schedule_id: params[:schedule_id]), alert: "名前またはメールアドレスを記入してください"
     end
   end
 
@@ -45,5 +40,4 @@ class ReservationsController < ApplicationController
   def reservation_params
     params.permit(:date, :schedule_id, :sheet_id, :email, :name, :movie_id)
   end
-
 end
