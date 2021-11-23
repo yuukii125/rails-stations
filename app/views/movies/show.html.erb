@@ -44,8 +44,8 @@
                         [@today.since(5.days).strftime("%-m月%-d日"),@today.since(5.days)],
                         [@today.since(6.days).strftime("%-m月%-d日"),@today.since(6.days)],
                         [@today.since(7.days).strftime("%-m月%-d日"),@today.since(7.days)]],
-                        prompt: "日付を選んでください"%>
-    <%= f.collection_select :id, @schedules, :id, :start_time, prompt: "開始時刻を選んでください" %>
+                        prompt: "日付を選択してください" %>
+    <%= f.collection_select :id, @schedules, :id, :start_time, prompt: "開始時刻を選択してください" %>
     <%= f.submit "座席を予約する" %>
   <% end %>
   <button>座席を予約する</button>

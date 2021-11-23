@@ -4,6 +4,10 @@ class SheetsController < ApplicationController
     @date = params[:date]
     @movie = Movie.find(params[:movie_id])
     @schedule = Schedule.find(params[:schedule_id])
+
+    unless @date.present? && @schedule.present?
+      redirect_to movie_path(@movie.id), alert: "日付と時刻を選択してください"
+    end
   end
 
 end
