@@ -10,8 +10,6 @@ class MoviesController < ApplicationController
 
     if @schedules.present?
       @schedule = @schedules[0]
-    else
-      @schedule = false
     end
   end
 
