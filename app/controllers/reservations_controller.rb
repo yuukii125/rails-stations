@@ -11,6 +11,17 @@ class ReservationsController < ApplicationController
       render "sheets/index"
     end
 
+    @already_reservation = Reservation.find_by(date: params[:date],
+                                              schedule_id: params[:schedule_id],
+                                              sheet_id: params[:sheet_id])
+
+    if @already_reservation.present?
+      redirect_to movie_schedule_sheets_path(movie_id: params[:movie_id],
+                                            date: params[:date],
+                                            schedule_id: params[:schedule_id]),
+                                            alert: "その座席はすでに予約済です"
+    end
+
   end
 
   def create
@@ -19,18 +30,7 @@ class ReservationsController < ApplicationController
                                   date: reservation_params[:date],
                                   sheet_id: reservation_params[:sheet_id],
                                   schedule_id: reservation_params[:schedule_id])
-    @sheets = Sheet.all
-    @already_reservation = Reservation.find_by(date: params[:date],
-                                              schedule_id: params[:schedule_id],
-                                              sheet_id: params[:sheet_id])
-
-    if @already_reservation.present?
-      @sheets
-      redirect_to movie_schedule_sheets_path(movie_id: params[:movie_id],
-                                            date: params[:date],
-                                            schedule_id: params[:schedule_id]),
-                                            alert: "その座席はすでに予約済です"
-    elsif @reservation.save
+    if @reservation.save
       redirect_to movie_path(@movie.id), notice: "予約しました！"
     else
       redirect_to new_movie_schedule_reservation_path(movie_id: params[:movie_id],
