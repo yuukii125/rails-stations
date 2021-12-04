@@ -38,9 +38,9 @@ class ReservationsController < ApplicationController
       #                                                 sheet_id: params[:sheet_id],
       #                                                 schedule_id: params[:schedule_id]),
       #                                                 alert: "名前またはメールアドレスを記入してください"
-      redirect_to movie_schedule_sheets_path(movie_id: params[:movie_id],
-                                            date: params[:reservation][:date],
-                                            schedule_id: params[:reservation][:schedule_id]),
+      redirect_to movie_schedule_sheets_path(movie_id: reservation_params[:movie_id],
+                                            date: reservation_params[:date],
+                                            schedule_id: reservation_params[:schedule_id]),
                                             alert: "名前またはメールアドレスを記入してください"
     end
   end
