@@ -2,14 +2,14 @@ class ReservationsController < ApplicationController
   before_action :set_movie, only: [:new, :create]
 
   def new
+    unless params[:date].present? && params[:sheet_id].present?
+      render status: 400
+    end
     @reservation = Reservation.new
     @date = params[:date]
     @sheet = Sheet.find(params[:sheet_id])
     @schedule = Schedule.find(params[:schedule_id])
 
-    unless @date.present? && @sheet.present?
-      render status: 400
-    end
 
     # @already_reservation = Reservation.find_by(date: params[:date],
     #                                           schedule_id: params[:schedule_id],
