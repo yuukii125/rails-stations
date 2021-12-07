@@ -14,11 +14,15 @@
     <td>5</td>
   </tr>
   <% @sheets.each do |s| %>
-      <td class="sheet_cell">
-      <%= link_to  new_movie_schedule_reservation_path(date: @date, sheet_id: s.id, movie_id: @movie.id, schedule_id: @schedule.id) do %>
-        <%= s.row %> - <%= s.column %>
+    <td class="sheet_cell">
+      <% if Reservation.exists?(date: @date, schedule_id: @schedule.id, sheet_id: s.id) %>
+          <%= s.row %> - <%= s.column %>
+      <% else %>
+        <%= link_to new_movie_schedule_reservation_path(date: @date, sheet_id: s.id, movie_id: @movie.id, schedule_id: @schedule.id) do %>
+          <%= s.row %> - <%= s.column %>
+        <% end %>
       <% end %>
-      </td>
+    </td>
   <% end %>
 </table>
 

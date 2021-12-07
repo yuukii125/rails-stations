@@ -9,19 +9,6 @@ class ReservationsController < ApplicationController
     @date = params[:date]
     @sheet = Sheet.find(params[:sheet_id])
     @schedule = Schedule.find(params[:schedule_id])
-
-
-    # @already_reservation = Reservation.find_by(date: params[:date],
-    #                                           schedule_id: params[:schedule_id],
-    #                                           sheet_id: params[:sheet_id])
-
-    # if @already_reservation.present?
-    #   redirect_to movie_schedule_sheets_path(movie_id: params[:movie_id],
-    #                                         date: params[:date],
-    #                                         schedule_id: params[:schedule_id]),
-    #                                         alert: "その座席はすでに予約済です"
-    # end
-
   end
 
   def create
