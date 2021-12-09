@@ -9,13 +9,13 @@
       <td class="cell_title">映画タイトル</td>
     </tr>
     <tr>
-      <td><%= @movie.name %></td>
+      <td class="cell_info"><%= @movie.name %></td>
     </tr>
     <tr>
       <td class="cell_title">選択中の日時</td>
     </tr>
     <tr>
-      <td>
+      <td class="cell_info">
       <%= @date %>
       <%= @schedule.start_time.strftime("%H:%M") %>
       <%= @schedule.end_time.strftime("%H:%M") %>
@@ -25,7 +25,7 @@
       <td class="cell_title">選択中の座席</td>
     </tr>
     <tr>
-      <td>
+      <td class="cell_info">
       <%= @sheet.row %> - <%= @sheet.column %>
       </td>
     </tr>
@@ -33,7 +33,7 @@
       <td class="cell_title">氏名</td>
     </tr>
     <tr>
-      <td>
+      <td class="cell_info">
       <%= f.text_field :name, placeholder: "氏名を入力してください" %>
       </td>
     </tr>
@@ -41,7 +41,7 @@
       <td class="cell_title">メールアドレス</td>
     </tr>
     <tr>
-      <td>
+      <td class="cell_info">
         <%= f.email_field :email, placeholder: "メールアドレスを入力してください" %>
       </td>
     </tr>

@@ -1,9 +1,26 @@
 <h2>座席予約ページ</h2>
-<p>映画タイトル：<%= @movie.name %></p>
-<p>鑑賞日：<%= @date %></p>
-<p>開始時刻：<%= @schedule.start_time.strftime("%H:%M") %></p>
-<p>終了時刻：<%= @schedule.end_time.strftime("%H:%M") %></p>
-<h4>座席を選択してください</h4>
+<table class="select_movie_info">
+  <tr>
+    <td class="cell_title">選択中の映画</td>
+  </tr>
+  <tr>
+    <td class="cell_info"><%= @movie.name %></td>
+  </tr>
+  <tr>
+    <td class="cell_title">選択中の日時</td>
+  </tr>
+  <tr>
+    <td class="cell_info">
+    <%= @date %>
+    <%= @schedule.start_time.strftime("%H:%M") %> 〜
+    <%= @schedule.end_time.strftime("%H:%M") %>
+    </td>
+  </tr>
+  <tr>
+    <td class="cell_title">座席の選択</td>
+  </tr>
+</table>
+
 <h3>SCREEN</h3>
 <table class="sheets_index">
   <tr>

@@ -1,16 +1,35 @@
 h3 {
   text-align: center;
-  margin-top: 100px;
+  margin-top: 20px;
   margin-bottom: 70px;
   border: 1px solid;
   padding: 10px;
+  width: 800px;
+}
+
+.select_movie_info {
+  padding-top: 50px;
+  text-align: center;
+  width: 1000px;
+  margin: 0 auto;
+}
+
+.cell_info {
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.cell_title {
+  border: 1px solid;
+  background-color: gray;
 }
 
 .sheets_index{
   border-collapse: collapse;
   border-spacing: 0;
   table-layout: fixed;
-  width: 1000px;
+  width: 800px;
   margin-bottom: 40px;
 }
 
@@ -28,5 +47,5 @@ h3 {
 
 .unavailable_sheet_cell {
   border: 0.1px solid;
-  background-color: gray;
+  background-color: rgb(196, 191, 191);
 }
