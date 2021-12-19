@@ -12,7 +12,7 @@
         上映予定
       <% end %>
     </p>
-    <p>登録日時：<%= m.created_at.strftime("%-m月%-d日%H:%M") %></p>
-    <p>更新日時：<%= m.updated_at.strftime("%-m月%-d日%H:%M") %></p>
+    <p>登録日時：<%= l m.created_at, format: :long %></p>
+    <p>更新日時：<%= l m.updated_at, format: :long %></p>
   </div>
 <% end %>

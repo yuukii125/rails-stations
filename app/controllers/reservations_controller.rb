@@ -2,13 +2,15 @@ class ReservationsController < ApplicationController
   before_action :set_movie, only: [:new, :create]
 
   def new
-    unless params[:date].present? && params[:sheet_id].present?
-      render status: 400
+    if params[:date].present? && params[:sheet_id].present?
+      # render status: 400
+      @reservation = Reservation.new
+      @date = params[:date].to_date
+      @sheet = Sheet.find(params[:sheet_id])
+      @schedule = Schedule.find(params[:schedule_id])
+    else
+      redirect_to movie_schedule_sheets_path(movie_id: @movie.id, schedule_id: params[:schedule_id]), alert: ""
     end
-    @reservation = Reservation.new
-    @date = params[:date]
-    @sheet = Sheet.find(params[:sheet_id])
-    @schedule = Schedule.find(params[:schedule_id])
   end
 
   def create

@@ -30,18 +30,18 @@
     </div>
     <div class="movie_item_show">
     登録日時：
-      <%= @movie.created_at.strftime("%-m月%-d日%H:%M")  %>
+      <%= l @movie.created_at, format: :long %>
     </div>
     <div class="movie_item_show">
     更新日時：
-      <%= @movie.updated_at.strftime("%-m月%-d日%H:%M")  %>
+      <%= l @movie.updated_at, format: :long %>
     </div>
     <div class="movie_item_show">
     上映スケジュール：
     <% if @schedules.present? %>
       <% @schedules.each do |s| %>
-        <%= s.start_time.strftime("%H:%M")  %> ~
-        <%= s.end_time.strftime("%H:%M")  %>
+        <%= l s.start_time, format: :short %> ~
+        <%= l s.end_time, format: :short %>
       <% end %>
     <% else %>
       上映スケジュールはありません
@@ -52,17 +52,17 @@
 <% if @schedule.present? %>
   <%= form_with model: @reservation, url:movie_schedule_sheets_path(movie_id: @movie, schedule_id: @schedule.id), method: :get do |f| %>
     <%= f.label :date, "日付：" %>
-    <%= f.select :date, [[@today.strftime("%-m月%-d日"),@today],
-                        [@today.since(1.days).strftime("%-m月%-d日"),@today.since(1.days)],
-                        [@today.since(2.days).strftime("%-m月%-d日"),@today.since(2.days)],
-                        [@today.since(3.days).strftime("%-m月%-d日"),@today.since(3.days)],
-                        [@today.since(4.days).strftime("%-m月%-d日"),@today.since(4.days)],
-                        [@today.since(5.days).strftime("%-m月%-d日"),@today.since(5.days)],
-                        [@today.since(6.days).strftime("%-m月%-d日"),@today.since(6.days)],
-                        [@today.since(7.days).strftime("%-m月%-d日"),@today.since(7.days)]],
+    <%= f.select :date, [[@today,@today.to_date],
+                        [@today.since(1.days),@today.since(1.days).to_date],
+                        [@today.since(2.days),@today.since(2.days).to_date],
+                        [@today.since(3.days),@today.since(3.days).to_date],
+                        [@today.since(4.days),@today.since(4.days).to_date],
+                        [@today.since(5.days),@today.since(5.days).to_date],
+                        [@today.since(6.days),@today.since(6.days).to_date],
+                        [@today.since(7.days),@today.since(7.days).to_date]],
                         prompt: "日付を選択してください" %>
-    <%= f.label :id, "開始時刻：" %>
-    <%= f.collection_select :id, @schedules, :id, :start_time, prompt: "開始時刻を選択してください" %>
+    <%= f.label :schedule_id, "開始時刻：" %>
+    <%= f.collection_select :schedule_id, @schedules, :id, :start_time, prompt: "開始時刻を選択してください" %>
     <%= f.submit "座席を予約する" %>
   <% end %>
   <button>座席を予約する</button>

@@ -12,8 +12,8 @@
   <tr>
     <td class="cell_info">
     <%= @date %>
-    <%= @schedule.start_time.strftime("%H:%M") %> 〜
-    <%= @schedule.end_time.strftime("%H:%M") %>
+    <%= l @schedule.start_time, format: :short %> 〜
+    <%= l @schedule.end_time, format: :short %>
     </td>
   </tr>
   <tr>
