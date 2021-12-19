@@ -1,6 +1,4 @@
 class ReservationsController < ApplicationController
-  # before_action :set_movie, only: [:new, :create]
-
   def new
     if params[:date].present? && params[:sheet_id].present?
       # render status: 400
@@ -35,9 +33,5 @@ class ReservationsController < ApplicationController
 
   def reservation_params
     params.require(:reservation).permit(:date, :schedule_id, :sheet_id, :email, :name, :movie_id)
-  end
-
-  def set_movie
-    @movie = Movie.find(reservation_params[:movie_id])
   end
 end
