@@ -1,5 +1,5 @@
 <h2>ご予約ページ</h2>
-<%= form_with scope: :reservation, url: movie_schedule_reservations_path(@movie.id, @schedule.id) do |f| %>
+<%= form_with scope: :reservation, url: reservations_path(@movie.id, @schedule.id) do |f| %>
   <%= f.hidden_field :date, value: @date %>
   <%= f.hidden_field :schedule_id, value: @schedule.id %>
   <%= f.hidden_field :sheet_id, value: @sheet.id %>
