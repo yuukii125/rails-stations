@@ -11,12 +11,12 @@
       <td>座席番号</td>
       <td>作成日時</td>
       <td>更新日時</td>
-      <td>編集・削除</td>
+      <td></td>
     </tr>
   <% @reservations.each do |r| %>
     <tr>
       <td>
-        <%= r.id %>
+        <%= link_to "#{r.id}", admin_reservation_path(r.id) %>
       </td>
       <td>
         <%= r.name %>
@@ -43,7 +43,8 @@
         <%= l r.updated_at, format: :long %>
       </td>
       <td>
-        <%#= r. %>
+        <%= link_to "編集", edit_admin_reservation_path(r.id) %>
+        <%= link_to "削除", admin_reservation_path(r.id), method: :delete, data: {confirm: "本当に削除しますか？"}%>
       </td>
     </tr>
   <% end %>
