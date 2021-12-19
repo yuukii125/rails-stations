@@ -1,0 +1,37 @@
+ <%#= render 'layouts/error_messages', model: @reservation %>
+ <%= form_with model: [:admin, @reservation], url: admin_reservation_path, local: true, method: :put do |f| %>
+  <div>
+    <%= f.label :name, "予約者氏名" %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div>
+    <%= f.label :email, "予約者メールアドレス" %>
+    <%= f.email_field :email %>
+  </div>
+
+  <div>
+    <%= f.label :name, "映画タイトル" %>
+    <%= f.fields_for :schedules do |movie| %>
+      <%= movie.text_field :name %>
+    <% end %>
+  </div>
+
+  <div>
+    <%= f.label :image_url, "予約時間" %>
+    <%#= f.fields_for :schedules do |schedule| %>
+      <%#= f.collection_select :id %>
+    <%# end %>
+  </div>
+
+  <div>
+    <%= f.label :sheet_id, "座席" %>
+    <%= f.fields_for :sheets do |sheet| %>
+      <%= sheet.time_field :row %>
+      <%= sheet.time_field :column %>
+    <% end %>
+  </div>
+  <%= f.submit "編集する" %>
+<% end %>
+
+<%= link_to "削除する",  admin_reservation_path(@reservation.id), method: :delete, data: {confirm: "本当に削除しますか？"}%>

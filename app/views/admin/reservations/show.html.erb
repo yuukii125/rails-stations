@@ -21,7 +21,7 @@
       映画タイトル
     </td>
     <td>
-      <%= @reservation.schedule.movie.name %>
+      <%= @movie.name %>
     </td>
   </tr>
   <tr>
@@ -29,7 +29,7 @@
       予約時間
     </td>
     <td>
-      <%= l @reservation.schedule.start_time, format: :short %> ~ <%= l @reservation.schedule.end_time, format: :short %>
+      <%= l @schedule.start_time, format: :short %> ~ <%= l @schedule.end_time, format: :short %>
     </td>
   </tr>
   <tr>
@@ -37,7 +37,7 @@
       座席
     </td>
     <td>
-      <%= @reservation.sheet.row %> - <%= @reservation.sheet.column %>
+      <%= @sheet.row %> - <%= @sheet.column %>
     </td>
   </tr>
 </table>
