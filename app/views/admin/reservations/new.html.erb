@@ -1,0 +1,61 @@
+<h2>予約新規作成</h2>
+ <%= form_with scope: :reservation, url: admin_reservations_path do |f| %>
+  <table class="reservation_new" cellpadding="15">
+    <tr>
+      <td class="cell_title">予約者氏名</td>
+    </tr>
+    <tr>
+      <td><%= f.text_field :name, placeholder: "氏名を入力してください" %></td>
+    </tr>
+    <tr>
+      <td class="cell_title">予約者Email</td>
+    </tr>
+    <tr>
+      <td class="cell_info">
+        <%= f.email_field :email, placeholder: "メールアドレスを入力してください" %>
+      </td>
+    </tr>
+    <tr>
+      <td class="cell_title">予約映画タイトル</td>
+    </tr>
+    <tr>
+      <td class="cell_info">
+        <%= f.fields_for :movies do |movie| %>
+          <%= movie.collection_select :id, Movie.all, :id, :name, prompt: "映画を選択してください"  %>
+          <%#= movie.collection_select :id, @movies, :id, :name, prompt: "映画を選択してください"  %>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <td class="cell_title">予約時間</td>
+    </tr>
+    <tr>
+      <td class="cell_info">
+        <%= f.fields_for :schedules do |schedule| %>
+          <%= schedule.collection_select :id, Schedule.all, :id, :start_time, prompt: "時刻を選択してください"  %>
+          <%#= schedule.collection_select :id, @schedule, :id, :start_time, prompt: "時刻を選択してください"  %>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <td class="cell_title">座席</td>
+    </tr>
+    <tr>
+      <td class="cell_info">
+        <%= f.fields_for :sheets do |sheet| %>
+          <%= sheet.collection_select :id, Sheet.all, :row, :row, prompt: "座席（行）を選択してください"  %>
+          <%= sheet.collection_select :id, Sheet.all, :column, :column, prompt: "座席（列）を選択してください"  %>
+          <%#= sheet.collection_select :id, @sheets, :row, :row, prompt: "座席（行）を選択してください"  %>
+          <%#= sheet.collection_select :id, @sheets, :column, :column, prompt: "座席（列）を選択してください"  %>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= f.submit "予約を作成する" %>
+      </td>
+    </tr>
+  </table>
+<% end %>
+
+<%= link_to "予約一覧へ戻る", admin_reservations_path %>

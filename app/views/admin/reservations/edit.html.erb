@@ -12,26 +12,32 @@
 
   <div>
     <%= f.label :name, "映画タイトル" %>
-    <%= f.fields_for :schedules do |movie| %>
-      <%= movie.text_field :name %>
-    <% end %>
+      <%= f.fields_for :movies do |movie| %>
+        <%= movie.text_field :name, value: @movie.name %>
+        <%= movie.hidden_field :id, value: @movie.id %>
+        <%#= movie.collection_select :id, @movies, :id, :name, selected: @movie.name  %>
+      <% end %>
   </div>
 
   <div>
-    <%= f.label :image_url, "予約時間" %>
-    <%#= f.fields_for :schedules do |schedule| %>
-      <%#= f.collection_select :id %>
-    <%# end %>
+    <%= f.label :start_time, "予約時間" %>
+      <%= f.fields_for :schedules do |schedule| %>
+        <%= schedule.text_field :start_time, value: @schedule.start_time %> ~
+        <%= schedule.text_field :end_time, value: @schedule.end_time %>
+      <% end %>
   </div>
 
   <div>
     <%= f.label :sheet_id, "座席" %>
     <%= f.fields_for :sheets do |sheet| %>
-      <%= sheet.time_field :row %>
-      <%= sheet.time_field :column %>
+      <%= sheet.text_field :row, value: @sheet.row %> -
+      <%= sheet.text_field :column, value: @sheet.column %>
     <% end %>
   </div>
   <%= f.submit "編集する" %>
 <% end %>
-
-<%= link_to "削除する",  admin_reservation_path(@reservation.id), method: :delete, data: {confirm: "本当に削除しますか？"}%>
+<%= @reservation.id %>
+<%= @reservation.sheet_id %>
+<%= @reservation.name %>
+<%= link_to "詳細に戻る",  admin_reservation_path(@reservation.id)%>
+<%= link_to "削除する",  admin_reservation_path(@reservation.id), method: :delete, data: {confirm: "本当に削除しますか？" }%>
