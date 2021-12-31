@@ -3,7 +3,7 @@ class Admin::ReservationsController < ApplicationController
   before_action :schedule_check, only: [:create, :update]
   before_action :sheet_check, only: [:create, :update]
   def index
-    @reservations = Reservation.all
+    @reservations = Reservation.all.page(params[:page]).per(10)
   end
 
   def show
