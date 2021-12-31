@@ -1,42 +1,52 @@
 <h2>予約詳細</h2>
-<table>
+<table class="reservation_show" cellpadding="15">
   <tr>
-    <td>
+    <td class="cell_title">
       予約者氏名
     </td>
-    <td>
+  </tr>
+  <tr>
+    <td class="cell_info">
       <%= @reservation.name %>
     </td>
   </tr>
   <tr>
-    <td>
+    <td class="cell_title">
       メールアドレス
     </td>
-    <td>
+  </tr>
+  <tr>
+    <td class="cell_info">
       <%= @reservation.email %>
     </td>
   </tr>
   <tr>
-    <td>
+    <td class="cell_title">
       映画タイトル
     </td>
-    <td>
+  </tr>
+  <tr>
+    <td class="cell_info">
       <%= @movie.name %>
     </td>
   </tr>
   <tr>
-    <td>
+    <td class="cell_title">
       予約時間
     </td>
-    <td>
+  </tr>
+  <tr>
+    <td class="cell_info">
       <%= l @schedule.start_time, format: :short %> ~ <%= l @schedule.end_time, format: :short %>
     </td>
   </tr>
   <tr>
-    <td>
+    <td class="cell_title">
       座席
     </td>
-    <td>
+  </tr>
+  <tr>
+    <td class="cell_info">
       <%= @sheet.row %> - <%= @sheet.column %>
     </td>
   </tr>

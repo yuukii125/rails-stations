@@ -3,11 +3,13 @@
   <div>
     <%= f.label :name, "予約者氏名" %>
     <%= f.text_field :name %>
+    <%#= @reservation.name %>
   </div>
 
   <div>
     <%= f.label :email, "予約者メールアドレス" %>
     <%= f.email_field :email %>
+    <%#= @reservation.email %>
   </div>
 
   <div>
@@ -36,8 +38,5 @@
   </div>
   <%= f.submit "編集する" %>
 <% end %>
-<%= @reservation.id %>
-<%= @reservation.sheet_id %>
-<%= @reservation.name %>
 <%= link_to "詳細に戻る",  admin_reservation_path(@reservation.id)%>
 <%= link_to "削除する",  admin_reservation_path(@reservation.id), method: :delete, data: {confirm: "本当に削除しますか？" }%>

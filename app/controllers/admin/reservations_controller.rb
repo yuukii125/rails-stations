@@ -1,20 +1,21 @@
 class Admin::ReservationsController < ApplicationController
+  before_action :set_reservation, only: [:show, :edit, :update, :destroy]
+  before_action :schedule_check, only: [:create, :update]
+  before_action :sheet_check, only: [:create, :update]
   def index
-    @reservations = Reservation.where("date >= ?", Date.today).order(:id)
+    @reservations = Reservation.all
   end
 
   def show
-    @reservation = Reservation.find(params[:id])
-    @movie = @reservation.schedule.movie
-    @sheet = @reservation.sheet
-    @schedule = @reservation.schedule
+      @movie = @reservation.schedule.movie
+      @sheet = @reservation.sheet
+      @schedule = @reservation.schedule
   end
 
   def new
     @reservation = Reservation.new
     @movies = Movie.all
     @sheets = Sheet.all
-    @schedule = @movies.first.schedules
   end
 
   def create
@@ -27,7 +28,6 @@ class Admin::ReservationsController < ApplicationController
   end
 
   def edit
-    @reservation = Reservation.find(params[:id])
     @movies = Movie.all
     @movie = @reservation.schedule.movie
     @schedule = @reservation.schedule
@@ -35,7 +35,6 @@ class Admin::ReservationsController < ApplicationController
   end
 
   def update
-    @reservation = Reservation.find(params[:id])
     if !@reservation.present?
       flash.now[:danger] = "編集もとの映画は存在しません"
     end
@@ -48,7 +47,6 @@ class Admin::ReservationsController < ApplicationController
   end
 
   def destroy
-    @reservation = Reservation.find(params[:id])
     if @reservation.destroy
       redirect_to admin_reservations_path, notice: "削除しました！"
     else
@@ -59,6 +57,14 @@ class Admin::ReservationsController < ApplicationController
 
   private
 
+  def set_reservation
+    if Reservation.exists?(params[:id])
+      @reservation = Reservation.find(params[:id])
+    else
+      redirect_to admin_reservations_path, notice: "指定されたIDは存在しません"
+    end
+  end
+
   def admin_reservation_params
     params.require(:reservation).permit(:date,
                                         :schedule_id,
@@ -66,8 +72,20 @@ class Admin::ReservationsController < ApplicationController
                                         :name,
                                         :email,
                                         movies_attributes: [:id, :name],
-                                        schedule_attributes: [:id, :start_time, :end_time],
-                                        sheet_attributes: [:id, :row, :column])
-  end
+                                        schedules_attributes: [:id, :start_time, :end_time],
+                                        sheets_attributes: [:id, :row, :column])
+    end
 
-end
+    def schedule_check
+      unless Schedule.exists?(params[:reservation][:schedules][:schedule_id])
+        redirect_to admin_reservations_path, notice: "指定したスケジュールは存在しません"
+      end
+    end
+
+    def sheet_check
+      unless Sheet.exists?(params[:reservation][:sheets][:sheet_id])
+        redirect_to admin_reservations_path, notice: "指定した座席は存在しません"
+      end
+    end
+
+  end

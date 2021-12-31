@@ -1,5 +1,5 @@
 <h2>予約一覧</h2>
-<% if @reservations.present? %>
+<%# if @reservations.present? %>
   <table>
     <tr>
       <td>ID</td>
@@ -32,7 +32,7 @@
         <%= l r.schedule.start_time,format: :short %>
       </td>
       <td>
-        <%#= %>
+        １
       </td>
       <td>
         <%= r.sheet.row %> - <%= r.sheet.column %>
@@ -50,7 +50,7 @@
     </tr>
   <% end %>
   </table>
-<% else %>
+<%# else %>
   本日以降の予約はありません
-<% end %>
+<%# end %>
 <%= link_to "新規作成", new_admin_reservation_path %>
