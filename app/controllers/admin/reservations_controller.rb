@@ -1,7 +1,6 @@
 class Admin::ReservationsController < ApplicationController
   before_action :set_reservation, only: [:show, :edit, :update, :destroy]
-  before_action :schedule_check, only: [:create, :update]
-  before_action :sheet_check, only: [:create, :update]
+
   def index
     @reservations = Reservation.all.page(params[:page]).per(10)
   end
@@ -14,31 +13,45 @@ class Admin::ReservationsController < ApplicationController
 
   def new
     @reservation = Reservation.new
+    # sheet = @reservation.build_sheet
+    # sheet.schedules.build
+    # sheet.movies.build
     @movies = Movie.all
     @sheets = Sheet.all
   end
 
   def create
     @reservation = Reservation.create(admin_reservation_params)
-    if @reservation.save
+
+    if Movie.exists?(params[:reservation][:movies][:id])
+      @movie = Movie.find(params[:reservation][:movies][:id])
+    else
+      redirect_to admin_reservations_path, notice: "指定された映画は存在しません"
+    end
+
+    if @reservation.save && @movie.save
       redirect_to admin_reservations_path, notice: "作成しました！"
     else
-      render :new
+      render :new, alert: "すべての項目を入力してください"
     end
   end
 
   def edit
-    @movies = Movie.all
-    @movie = @reservation.schedule.movie
-    @schedule = @reservation.schedule
-    @sheet = @reservation.sheet
+    if @movie = @reservation.schedule.movie
+      @schedules = @reservation.schedule
+      @sheets = @reservation.sheet
+    else
+      redirect_to admin_reservations_path, notice: "指定された映画は存在しません"
+    end
   end
 
   def update
-    if !@reservation.present?
-      flash.now[:danger] = "編集もとの映画は存在しません"
-    end
-    if @reservation.update(admin_reservation_params)
+    @movie = @reservation.schedule.movie
+    if !@reservation.present? || !Schedule.exists?(params[:reservation][:schedule_id]) || !Sheet.exists?(params[:reservation][:sheet_id])
+      flash.now[:danger] = "編集もとの映画、またはスケジュール、座席は存在しません"
+      render :edit
+    # if @reservation.update(admin_reservation_params) && @movie.update(admin_reservation_params[:reservation][:movies][:id])
+    elsif @reservation.update(admin_reservation_params)
       redirect_to admin_reservation_path, notice: "編集しました"
     else
       flash.now[:danger] = "編集に失敗しました"
@@ -71,21 +84,6 @@ class Admin::ReservationsController < ApplicationController
                                         :sheet_id,
                                         :name,
                                         :email,
-                                        movies_attributes: [:id, :name],
-                                        schedules_attributes: [:id, :start_time, :end_time],
-                                        sheets_attributes: [:id, :row, :column])
+                                        schedules_attributes: [:id, :start_time, :end_time],)
     end
-
-    def schedule_check
-      unless Schedule.exists?(params[:reservation][:schedules][:schedule_id])
-        redirect_to admin_reservations_path, notice: "指定したスケジュールは存在しません"
-      end
-    end
-
-    def sheet_check
-      unless Sheet.exists?(params[:reservation][:sheets][:sheet_id])
-        redirect_to admin_reservations_path, notice: "指定した座席は存在しません"
-      end
-    end
-
   end

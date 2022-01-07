@@ -2,7 +2,7 @@
  <%= form_with scope: :reservation, url: admin_reservations_path do |f| %>
   <table class="reservation_new" cellpadding="15">
     <tr>
-      <td class="cell_title">予約者氏名</td>
+     <td class="cell_title">予約者氏名</td>
     </tr>
     <tr>
       <td><%= f.text_field :name, placeholder: "氏名を入力してください" %></td>
@@ -21,9 +21,7 @@
     <tr>
       <td class="cell_info">
         <%= f.fields_for :movies do |movie| %>
-          <%#= movie.collection_select :id, Movie.all, :id, :name, prompt: "映画を選択してください"  %>
-          <%#= movie.collection_select :id, @movies, :id, :name, prompt: "映画を選択してください"  %>
-        <%= movie.number_field :name, placeholder: "映画のIDの選択" %>
+          <%= movie.collection_select :id, Movie.all, :id, :id, prompt: "映画IDを選択してください"  %>
         <% end %>
       </td>
     </tr>
@@ -33,10 +31,7 @@
     <tr>
       <td class="cell_info">
         <%= f.fields_for :schedules do |schedule| %>
-          <%#= schedule.collection_select :id, Schedule.all, :id, :id, prompt: "時刻を選択してください"  %>
-          <%#= schedule.collection_select :id, Schedule.all, :id, :start_time, prompt: "時刻を選択してください"  %>
-          <%#= schedule.collection_select :id, @schedule, :id, :start_time, prompt: "時刻を選択してください"  %>
-          <%= schedule.number_field :schedule_id, placeholder: "スケジュールIDの選択" %>
+          <%= schedule.collection_select :schedule_id, Schedule.all, :id, :id, prompt: "時刻IDを選択してください"  %>
         <% end %>
       </td>
     </tr>
@@ -46,11 +41,7 @@
     <tr>
       <td class="cell_info">
         <%= f.fields_for :sheets do |sheet| %>
-          <%#= sheet.collection_select :id, Sheet.all, :row, :row, prompt: "座席（行）を選択してください"  %>
-          <%#= sheet.collection_select :id, Sheet.all, :column, :column, prompt: "座席（列）を選択してください"  %>
-          <%#= sheet.collection_select :id, @sheets, :row, :row, prompt: "座席（行）を選択してください"  %>
-          <%#= sheet.collection_select :id, @sheets, :column, :column, prompt: "座席（列）を選択してください"  %>
-          <%= sheet.number_field :sheet_id, placeholder: "座席IDの選択" %>
+          <%= sheet.collection_select :sheet_id, Sheet.all, :id, :id, prompt: "座席IDを選択してください"  %>
         <% end %>
       </td>
     </tr>

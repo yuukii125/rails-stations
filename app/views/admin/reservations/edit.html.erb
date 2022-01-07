@@ -1,42 +1,65 @@
- <%#= render 'layouts/error_messages', model: @reservation %>
+ <h2>予約編集</h2>
  <%= form_with model: [:admin, @reservation], url: admin_reservation_path, local: true, method: :put do |f| %>
-  <div>
-    <%= f.label :name, "予約者氏名" %>
-    <%= f.text_field :name %>
-    <%#= @reservation.name %>
-  </div>
+  <table class="reservation_new">
+    <tr>
+      <td class="cell_title">
+        <%= f.label :name, "予約者氏名" %>
+      </td>
+    </tr>
+    <tr>
+      <td class="cell_info">
+        <%= f.text_field :name %>
+      </td>
+    </tr>
 
-  <div>
-    <%= f.label :email, "予約者メールアドレス" %>
-    <%= f.email_field :email %>
-    <%#= @reservation.email %>
-  </div>
+    <tr>
+      <td class="cell_title">
+        <%= f.label :email, "予約者メールアドレス" %>
+      </td>
+    </tr>
+    <tr>
+      <td class="cell_info">
+        <%= f.email_field :email %>
+      </td>
+    </tr>
 
-  <div>
-    <%= f.label :name, "映画タイトル" %>
-      <%= f.fields_for :movies do |movie| %>
-        <%= movie.text_field :name, value: @movie.name %>
-        <%= movie.hidden_field :id, value: @movie.id %>
-        <%#= movie.collection_select :id, @movies, :id, :name, selected: @movie.name  %>
-      <% end %>
-  </div>
+    <tr>
+      <td class="cell_title">
+        <%= f.label :name, "映画タイトル" %>
+      </td>
+    </tr>
+    <tr>
+      <td class="cell_info">
+        <%= @movie.name %>
+      </td>
+    </tr>
 
-  <div>
-    <%= f.label :start_time, "予約時間" %>
-      <%= f.fields_for :schedules do |schedule| %>
-        <%= schedule.text_field :start_time, value: @schedule.start_time %> ~
-        <%= schedule.text_field :end_time, value: @schedule.end_time %>
-      <% end %>
-  </div>
+    <tr>
+      <td class="cell_title">
+        <%= f.label :schedule_id, "予約時間" %>
+      </td>
+    </tr>
+    <tr>
+      <td class="cell_info">
+        <%= f.collection_select :schedule_id, @movie.schedules, :id, :start_time %>
+      </td>
+    </tr>
 
-  <div>
-    <%= f.label :sheet_id, "座席" %>
-    <%= f.fields_for :sheets do |sheet| %>
-      <%= sheet.text_field :row, value: @sheet.row %> -
-      <%= sheet.text_field :column, value: @sheet.column %>
-    <% end %>
-  </div>
-  <%= f.submit "編集する" %>
+    <tr>
+      <td class="cell_title">
+        <%= f.label :sheet_id, "座席" %>
+      </td>
+    </tr>
+    <tr>
+      <td class="cell_info">
+        <%= f.number_field :sheet_id %>
+      </td>
+    </tr>
+    <tr>
+      <td><%= f.submit "編集する" %></td>
+    </tr>
+  </table>
 <% end %>
+
 <%= link_to "詳細に戻る",  admin_reservation_path(@reservation.id)%>
 <%= link_to "削除する",  admin_reservation_path(@reservation.id), method: :delete, data: {confirm: "本当に削除しますか？" }%>
