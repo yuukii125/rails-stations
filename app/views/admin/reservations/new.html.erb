@@ -20,9 +20,26 @@
     </tr>
     <tr>
       <td class="cell_info">
-        <%= f.fields_for :movies do |movie| %>
-          <%= movie.collection_select :id, Movie.all, :id, :id, prompt: "映画IDを選択してください"  %>
+        <%= f.fields_for :schedules do |schedule| %>
+          <%= schedule.collection_select :movie_id, Movie.all, :id, :name, prompt: "映画を選択してください"  %>
         <% end %>
+      </td>
+    </tr>
+    <tr>
+      <td class="cell_title">予約日付</td>
+    </tr>
+    <tr>
+      <td class="cell_info">
+        <%# movies/showと重複した記述のためリファクタリング必要 %>
+        <%= f.select :date, [[@today,@today],
+                            [@today.since(1.days),@today.since(1.days)],
+                            [@today.since(2.days),@today.since(2.days)],
+                            [@today.since(3.days),@today.since(3.days)],
+                            [@today.since(4.days),@today.since(4.days)],
+                            [@today.since(5.days),@today.since(5.days)],
+                            [@today.since(6.days),@today.since(6.days)],
+                            [@today.since(7.days),@today.since(7.days)]],
+                            prompt: "日付を選択してください" %>
       </td>
     </tr>
     <tr>
@@ -30,9 +47,7 @@
     </tr>
     <tr>
       <td class="cell_info">
-        <%= f.fields_for :schedules do |schedule| %>
-          <%= schedule.collection_select :schedule_id, Schedule.all, :id, :id, prompt: "時刻IDを選択してください"  %>
-        <% end %>
+          <%= f.collection_select :schedule_id, Schedule.all, :id, :start_time, prompt: "時刻を選択してください"  %>
       </td>
     </tr>
     <tr>
@@ -40,9 +55,7 @@
     </tr>
     <tr>
       <td class="cell_info">
-        <%= f.fields_for :sheets do |sheet| %>
-          <%= sheet.collection_select :sheet_id, Sheet.all, :id, :id, prompt: "座席IDを選択してください"  %>
-        <% end %>
+          <%= f.collection_select :sheet_id, Sheet.all, :id, :id, prompt: "座席IDを選択してください"  %>
       </td>
     </tr>
     <tr>
