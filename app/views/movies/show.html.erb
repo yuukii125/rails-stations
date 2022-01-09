@@ -65,7 +65,6 @@
     <%= f.collection_select :schedule_id, @schedules, :id, :start_time, prompt: "開始時刻を選択してください" %>
     <%= f.submit "座席を予約する" %>
   <% end %>
-  <button>座席を予約する</button>
 <% end %>
 
 <p><%= link_to "一覧にもどる", movies_path %></p>
