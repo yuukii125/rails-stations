@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_04_133950) do
+ActiveRecord::Schema.define(version: 2022_01_16_124629) do
 
   create_table "movies", id: :integer, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", limit: 160, null: false, comment: "æ˜ ç”»ã\u0081®ã‚¿ã‚¤ãƒˆãƒ«ã€‚é‚¦é¡Œãƒ»æ´‹é¡Œã\u0081¯ä¸€æ—¦è€ƒã\u0081ˆã\u0081ªã\u0081\u008Fã\u0081¦OK"
@@ -45,6 +45,15 @@ ActiveRecord::Schema.define(version: 2021_12_04_133950) do
     t.index ["movie_id"], name: "index_schedules_on_movie_id"
   end
 
+  create_table "screens", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "movie_id", null: false
+    t.integer "screen_number", limit: 3, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["movie_id", "screen_number"], name: "index_screens_on_movie_id_and_screen_number", unique: true
+    t.index ["movie_id"], name: "index_screens_on_movie_id"
+  end
+
   create_table "sheets", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "column", null: false
     t.string "row", limit: 1, null: false
@@ -55,4 +64,5 @@ ActiveRecord::Schema.define(version: 2021_12_04_133950) do
   add_foreign_key "reservations", "schedules"
   add_foreign_key "reservations", "sheets"
   add_foreign_key "schedules", "movies"
+  add_foreign_key "screens", "movies"
 end
