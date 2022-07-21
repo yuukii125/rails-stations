@@ -72,6 +72,8 @@ cd rails-stations
 docker compose build
 docker compose run --rm web bundle install
 docker compose up -d
+docker compose exec web rails db:create
+docker compose exec web rails db:migrate
 docker compose exec web yarn install // ←こちらを実行した後に「TechTrainにログインします。GitHubでサインアップした方はお手数ですが、パスワードリセットよりパスワードを発行してください」と出てくるため、ログインを実行してください。出てこない場合は、コマンドの実行に失敗している可能性があるため、TechTrainの問い合わせかRailwayのSlackより問い合わせをお願いいたします。
 ```
 
@@ -153,14 +155,14 @@ yarn install
 
 ### （GitHubアカウントでサインアップしたので）パスワードがわかりません
 
-https://techbowl.co.jp/techtrain/resetpassword
+https://techtrain.dev/resetpassword
 
 上記のURLより自分の登録したメールアドレスより、パスワードリセットを行うことで、パスワードを発行してください。
 
 メールアドレスがわからない場合は、ログイン後にユーザー情報の編集画面で確認してください。
 ログインしていれば、次のURLから確認できます。
 
-https://techbowl.co.jp/techtrain/mypage/profile
+https://techtrain.dev/mypage/profile
 
 ### DBに接続して中身を見たいです
 以下の2点を確認してみてください。
@@ -213,14 +215,6 @@ mysql: [Warning] Using a password on the command line interface can be insecure.
 | sys                |
 +--------------------+
 ```
-
-もし、 `app_development` と `app_test` が作成されていないようであれば、次のコマンドを実行しましょう。
-
-```
-docker exec -i rails-stations_db_1 mysql -h127.0.0.1 -uroot -ppassword < init/001_ddl.sql
-```
-
-これで、 `app_development` と `app_test` が作成されていれば、問題なく接続できます。
 
 ### commitしたのにチェックが実行されていないようです
 
